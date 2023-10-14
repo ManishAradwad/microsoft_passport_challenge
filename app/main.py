@@ -50,8 +50,9 @@ alpha = config.alpha
 height, width = config.height, config.width
 
 image_paths = glob(path)
+
 try:
-  embeddings = np.loadtxt("embeds.txt")
+  embeddings = np.loadtxt("app/embeds.txt")
 except:
   # VGG16 is used as pretrained CNN model
   vgg_model = VGG16(weights='imagenet', include_top=False, input_shape=(height, width, 3))
@@ -72,7 +73,7 @@ except:
   embeddings = np.concatenate([model.predict(images) for images in image_ds], axis=0)
 
   # embeddings = np.squeeze(np.array(embeddings))
-  np.savetxt("embeds.txt", embeddings)
+  np.savetxt("app/embeds.txt", embeddings)
 
 km = KMeans(n_clusters=n_clusters).fit(embeddings)
 clusters = np.zeros(n_samples)
