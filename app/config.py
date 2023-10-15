@@ -1,4 +1,4 @@
-n_samples = 2090
+n_samples = 11384
 ds_path = "app/archive/*"
 height = 512
 width = 512

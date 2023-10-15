@@ -1,5 +1,6 @@
 from PIL import Image
 import numpy as np
+import tensorflow as tf
 import random
 import config
 
@@ -9,6 +10,13 @@ n_clusters = config.n_clusters
 p = config.p
 n = config.n
 alpha = config.alpha
+
+def load_and_preprocess_image(path):
+    image = tf.io.read_file(path)
+    image = tf.image.decode_jpeg(image, channels=3)
+    image = tf.image.resize(image, [height, width])
+    image /= 255.0  # normalize to [0,1] range
+    return image
 
 # This function does all preprocessing needed
 def preprocess(image_path):
